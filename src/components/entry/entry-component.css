@@ -1,0 +1,31 @@
+.entry-container {
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    align-content: space-evenly;
+}
+
+.entry-checkbox{
+   flex:1;
+   width: 16px;
+   height: 16px;
+}
+
+.entry-content{
+    width: 48px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex:1;
+}
+
+.entry-date{
+    text-align: center;
+    justify-content: center;
+    flex:1;
+}
+
+.entry-create-button{
+   width: 100%;
+}

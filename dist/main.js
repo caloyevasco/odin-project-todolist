@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log("Currently at {document.title}")})();
