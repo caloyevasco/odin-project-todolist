@@ -7,8 +7,17 @@ const EntryCheckBox = (isChecked) => {
     return checkBoxInput;
 }
 
-const EntryContent = (content) => {
+const EntryContent = (content, isChecked, createdAt, selectCallback, id) => {
+
     const entryContent = document.createElement('p');
+    entryContent.addEventListener('click', () => {
+        selectCallback({
+            isChecked: isChecked,
+            content: content,
+            createdAt: createdAt,
+            id: id
+        });
+    });
     entryContent.textContent = content;
     entryContent.className = 'entry-content';
     return entryContent
@@ -24,17 +33,10 @@ const EntryCreatedAt = (createdAt) => {
 
 export const Entry = (isChecked, content, createdAt, selectCallback, id) => {
     const container = document.createElement('div');
-    container.addEventListener('click', () => {
-        selectCallback({
-            isChecked: isChecked,
-            content: content,
-            createdAt: createdAt,
-            id: id
-        });
-    });
+
     container.className = 'entry-container';
     container.append(EntryCheckBox(false));
-    container.append(EntryContent(content));
+    container.append(EntryContent(content, isChecked, createdAt, selectCallback, id));
     container.append(EntryCreatedAt(createdAt));
     return container;
 }

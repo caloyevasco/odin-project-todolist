@@ -16,12 +16,22 @@ const render = (elements) => {
     document.body.append(root)
 }
 
+const setContentCallback = (todoObject, content) => {
+    todos.map((todo) => {
+        if(todo.id == todoObject.id){
+            todo.content = content;
+        }
+        console.log(todo);
+        return todo;
+    });
+}
+
 
 const callbackFunc = (entry) => {
     console.log(`previous ${selectedEntry.content}`);
     selectedEntry = entry;
     console.log(`new ${selectedEntry.content}`)
-    render([SideBar(todos), ContentView(selectedEntry.content)]);
+    render([SideBar(todos), ContentView(selectedEntry, setContentCallback)]);
 }
 
 
@@ -44,7 +54,8 @@ let todos = [
 
 
 
+
 render([
     SideBar(todos),
-    ContentView(selectedEntry.content)
+    ContentView(selectedEntry, setContentCallback)
 ])
