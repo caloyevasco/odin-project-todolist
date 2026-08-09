@@ -1,4 +1,5 @@
 import "./side-bar.css"
+import { CreateEntry } from "../create-entry/create-entry.js";
 import { Entry } from "../entry/entry.js";
 
 const Header = () => {
@@ -19,19 +20,19 @@ const Create = () => {
     return button;
 }
 
-export const SideBar = (todos) => {
+export const SideBar = (todos, createEntry, setCheckCallback) => {
     const container = document.createElement('div');
     container.className = 'sidebar'
 
     container.append(Header());
 
     const tasks = todos.map((curr) => Entry(
-        curr.isChecked,
-        curr.content,
-        curr.createdAt,
+        curr,
         curr.selectedCallback,
-        curr.id
+        curr.setCheckCallback
     ))
+
+    tasks.push(createEntry);
 
     container.append(...tasks);
 

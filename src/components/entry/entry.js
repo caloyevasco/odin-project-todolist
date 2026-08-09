@@ -1,15 +1,22 @@
 import "./entry-component.css";
 
-const EntryCheckBox = (isChecked) => {
+const EntryCheckBox = (todo, setCheckCallback) => {
     const checkBoxInput = document.createElement('input');
+    checkBoxInput.checked = todo.isChecked;
     checkBoxInput.type = 'checkbox';
     checkBoxInput.className = 'entry-checkbox';
+    checkBoxInput.addEventListener('click', () => {
+        setCheckCallback(todo, checkBoxInput.checked)
+    })
     return checkBoxInput;
 }
 
 const EntryContent = (content, isChecked, createdAt, selectCallback, id) => {
 
     const entryContent = document.createElement('p');
+
+    if(isChecked) entryContent.style.textDecoration = "line-through";
+
     entryContent.addEventListener('click', () => {
         selectCallback({
             isChecked: isChecked,
@@ -31,12 +38,14 @@ const EntryCreatedAt = (createdAt) => {
 }
 
 
-export const Entry = (isChecked, content, createdAt, selectCallback, id) => {
+export const Entry = (todos, selectCallback, setCheckCallback) => {
     const container = document.createElement('div');
 
+    console.log(todos);
+
     container.className = 'entry-container';
-    container.append(EntryCheckBox(false));
-    container.append(EntryContent(content, isChecked, createdAt, selectCallback, id));
-    container.append(EntryCreatedAt(createdAt));
+    container.append(EntryCheckBox(todos, setCheckCallback));
+    container.append(EntryContent(todos.content, todos.isChecked, todos.createdAt, selectCallback, todos.id));
+    container.append(EntryCreatedAt(todos.createdAt));
     return container;
 }
